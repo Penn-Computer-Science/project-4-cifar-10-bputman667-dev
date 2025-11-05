@@ -44,9 +44,9 @@ model = tf.keras.models.Sequential(
     ]
 )
 
-model.compile(optimizer='adam',loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+model.compile(optimizer='adam',loss='categorical_crossentropy', metrics=['accuracy']) #removed sparse from categorical crossentropy
 
-history = model.fit(x_train, y_train,epochs=10,validation_data=(x_test, y_test))
+history = model.fit(x_train, y_train,epochs=10)
 #plot out training and validation accuracy and loss
 
 fig, ax = plt.subplots(2,1)
