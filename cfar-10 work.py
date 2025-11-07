@@ -29,24 +29,34 @@ from keras.utils import to_categorical
 y_train = to_categorical(y_train, 10)
 y_test = to_categorical(y_test, 10)
 
-batch_size1 = 128
+batch_size1 = 256
 num_classes = 10
-epochs1 = 5
 
 #build model
+counter = 0
+
 model = tf.keras.models.Sequential(
     [
         tf.keras.layers.Conv2D(64, (5, 5), padding='same', activation = 'relu', input_shape = input_shape),
+        #tf.keras.layers.MaxPool2D(),
+        tf.keras.layers.Dropout(0.25),
+        tf.keras.layers.Conv2D(64, (3, 3), padding='same', activation = 'relu', input_shape = input_shape),
         tf.keras.layers.MaxPool2D(),
         tf.keras.layers.Dropout(0.25),
+        tf.keras.layers.Conv2D(128, (5, 5), padding='same', activation = 'relu', input_shape = input_shape),
+        #tf.keras.layers.MaxPool2D(),
+        #tf.keras.layers.Dropout(0.1),
+        tf.keras.layers.Conv2D(128, (3, 3), padding='same', activation = 'relu', input_shape = input_shape),
+        tf.keras.layers.MaxPool2D(),
+        #tf.keras.layers.Dropout(0.1),
         tf.keras.layers.Flatten(),
-        tf.keras.layers.Dense(num_classes, activation = 'softmax')
-    ]
+        tf.keras.layers.Dense(num_classes, activation = 'softmax'),
+    ],
 )
 
-model.compile(optimizer='adam',loss='categorical_crossentropy', metrics=['accuracy']) #removed sparse from categorical crossentropy
+model.compile(optimizer='adam',loss='categorical_crossentropy', metrics=['acc']) #removed sparse from categorical crossentropy
 
-history = model.fit(x_train, y_train,epochs=10)
+history = model.fit(x_train, y_train,epochs=10, validation_split=0.1)
 #plot out training and validation accuracy and loss
 
 fig, ax = plt.subplots(2,1)
