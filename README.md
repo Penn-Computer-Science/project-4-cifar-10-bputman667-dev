@@ -57,8 +57,11 @@ history = model.fit(x_train, y_train,epochs=10,validation_data=(x_test, y_test))
 ## Step 5. Reflection
  -  Add a short Markdown section at the end of your notebook:
    -  What differences did you notice between MNIST and CIFAR-10?
+   I noticed that not only did CIFAR-10 end with a lot less accuracy than MNIST, it was also almost three times as slow which really sucked.
    -  What changes to your architecture helped performance?
+   In general, I had to use a lot more layers. While MNIST allowed me to use only a couple of layers, I had to use over 10 layers for most CIFAR-10 models to deal with the extremely low accuracy.
    -  If you had more time, what improvements would you try next?
+   I'd probably try to figure out how to make CIFAR-10 act differently on certain epochs, as this would allow me to account for some models being good on earlier epochs, and other models being good on later epochs.
 
 ## Submission:
 Be sure to include the following in your submission - Push to GitHub with a comment of "FINISHED" when complete
